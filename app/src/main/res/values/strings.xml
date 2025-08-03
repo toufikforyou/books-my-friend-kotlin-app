@@ -1,0 +1,139 @@
+<resources>
+    <string name="app_name" translatable="false">BOOKS MY FRIEND</string>
+    <string name="appNameText">Books My Friend</string>
+
+    <!--  TODO:: Common text -->
+    <string name="getStartedText">Get Started</string>
+    <string name="nextText">Next</string>
+    <string name="iamInText">I\'m in</string>
+    <string name="pleaseWaitText">Please wait…</string>
+    <string name="todo">Todo</string>
+    <string name="verifyText">Verify</string>
+    <string name="searchHereText">Search here…</string>
+    <string name="fromText" translatable="false">From</string>
+    <string name="companyNameText" translatable="false">SOPNO LIKHI</string>
+
+    <!--  TODO:: Permission request text common  -->
+    <string name="locationRequirePermissionText">Location permission is required to get the location</string>
+    <string name="notificationRequirePermissionText">Notification permission is required to get the suggested offer</string>
+
+
+    <!--  TODO:: Intro Activity text -->
+
+    <!--  TODO:: Authentication Activity text -->
+    <!--  SignIn Fragment  -->
+    <string name="forgottenPasswordText">Forgotten password?</string>
+    <string name="signInSuccessText">LogIn Success</string>
+
+    <!--  SignUp Fragment  -->
+    <string name="enterFullNameText">Type full name</string>
+    <string name="enterEmailMobileText">Type your phone or email</string>
+    <string name="invalidFullNameText">Full name is invalid</string>
+    <string name="invalidMobileEmailText">Mobile or email is not valid</string>
+    <string name="outSiteBdSmgText" translatable="false">Outside of bangladesh must be email. Because mobile otp included only bangladesh. coming soon other country.</string>
+
+    <!--  Otp Fragment  -->
+    <string name="verifyCodeText">Verify Code</string>
+    <string name="sendOtpAccountSmgText">A verification code has been sent to your account. +8801799*****26 Verify the code below.</string>
+    <string name="didNotGetCodeText">I didn\'t get any code?</string>
+    <string name="sendAgainCodeText">Send again</string>
+
+    <!--  Gender Fragment  -->
+    <string name="step3_4Text">¾</string>
+    <string name="selectGenderText">Select Gender</string>
+    <string name="maleText">Male</string>
+    <string name="feMaleText">Female</string>
+    <string name="otherGenderText">Other</string>
+    <string name="selectAgeText">Select Age</string>
+    <string name="selectGenderAgeText">Select gender and age.</string>
+
+    <!--  Password Fragment  -->
+    <string name="step4_4Text">4/4</string>
+    <string name="createPasswordText">Create password</string>
+    <string name="enterNewPasswordText">Enter new password</string>
+    <string name="confirmPasswordText">Confirm password</string>
+    <string name="createYourAccountText">Create your account</string>
+    <string name="errorPasswordMatchText">Password doesn\'t match!</string>
+    <string name="errorPasswordText">Password must be 8 digit and character!</string>
+
+    <!--  Account Find Fragment  -->
+    <string name="findAccountText">Find your account</string>
+
+    <!--  Common text related activity  -->
+    <string name="signInText">Sign In</string>
+    <string name="signUpText">Sign Up</string>
+    <string name="emailMobileUsernameText">Email/Mobile/Username</string>
+    <string name="passwordText">Password</string>
+    <string name="emptyFieldText">This field is empty</string>
+    <string name="commonCreateAccountText">Create\nAccount</string>
+
+    <!--  TODO:: Main Activity text -->
+    <!--  Navigation Text  -->
+    <string name="sloganApplicationText">Read books, books expand the mind</string>
+    <string name="navHomeText">Home</string>
+    <string name="navMyBooksText">My Books</string>
+    <string name="navDownloadText">Download</string>
+    <string name="navMyFeedText">My Feed</string>
+
+    <string name="navFavoriteBooksText">Favorite Books</string>
+    <string name="navWorkFlowText">Work Flow</string>
+    <string name="navUpdateText">Update</string>
+    <string name="navCatAppToolsText">Application Tools</string>
+    <string name="navPrivacyPolicyText">Privacy Policy</string>
+    <string name="navTermsConditionsText">Terms and Conditions</string>
+    <string name="navSettingText">Setting</string>
+    <string name="navCatCommunicationText">Communication</string>
+    <string name="navContactUsText">Contact Us</string>
+    <string name="navFaqText">FAQ</string>
+    <string name="navInviteFriendsText">Invite Friends</string>
+    <string name="navShareText">Share</string>
+
+    <string name="openNavigationText">Navigation Open</string>
+    <string name="closeNavigationText">Navigation Close</string>
+
+    <!--  NavHome Fragment Text  -->
+    <string name="allBooksText">All Books</string>
+    <string name="favoriteBooksText">Favorite</string>
+    <string name="popularBooksText">Popular</string>
+
+    <!--  Create Book Fragment Text  -->
+    <string name="createBookText">Create book</string>
+    <string name="createYourBookText">Create your book</string>
+    <string name="notSetText">Not Set</string>
+
+
+    <!--  TODO:: Setting Activity text -->
+    <string name="commonDefaultText">Default</string>
+    <string name="nightModeText">Night Mode</string>
+    <string name="selectSystemText">System</string>
+    <string name="selectLightText">Light</string>
+    <string name="selectNightText">Night</string>
+
+    <string name="themeText">Theme</string>
+
+    <string name="fontSizeText">Font Size</string>
+    <string name="selectSmallText">Small</string>
+    <string name="selectMediumText">Medium</string>
+    <string name="selectLargeText">Large</string>
+
+    <string name="languageText">Language</string>
+    <string name="selectLocateText">Locate</string>
+    <string name="selectBanglaText">বাংলা</string>
+    <string name="selectEnglishText">English</string>
+
+    <string name="notificationsText">Notifications</string>
+
+
+    <!--  TODO:: Notification Channel  -->
+    <string name="default_notification_channel_id" translatable="false">171278207501</string>
+    <string name="default_notification_channel_name" translatable="false">Default</string>
+    <string name="default_notification_channel_desc" translatable="false">Channel for important default</string>
+
+    <string name="announcement_notification_channel_id" translatable="false">171278207502</string>
+    <string name="announcement_notification_channel_name" translatable="false">Announcement</string>
+    <string name="announcement_notification_channel_desc" translatable="false">Channel for important announcements</string>
+
+    <string name="create_book_notification_channel_id" translatable="false">171278207503</string>
+    <string name="create_book_notification_channel_name" translatable="false">Create Book</string>
+    <string name="create_book_notification_channel_desc" translatable="false">Channel for important create new books</string>
+</resources>

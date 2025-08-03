@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appNameText">বই আমার বন্ধু</string>
+
+    <!--  TODO:: Common text -->
+    <string name="getStartedText">শুরু করুন</string>
+    <string name="nextText">পরবর্তী</string>
+    <string name="iamInText">আমি সম্মীত</string>
+    <string name="pleaseWaitText">অপেক্ষা করুন…</string>
+    <string name="searchHereText">খুজুন…</string>
+    <string name="todo">টুডু</string>
+    <string name="verifyText">যাচাই করুন</string>
+
+    <!--  TODO:: Permission request text common  -->
+    <string name="locationRequirePermissionText">Location permission is required to get the location</string>
+    <string name="notificationRequirePermissionText">Notification permission is required to get the suggested offer</string>
+
+
+    <!--  TODO:: Intro Activity text -->
+
+    <!--  TODO:: Authentication Activity text -->
+    <!--  SignIn Fragment  -->
+    <string name="forgottenPasswordText">পাসওয়ার্ড মনে নাই?</string>
+    <string name="signInSuccessText">লগইন সফল</string>
+
+    <!--  SignUp Fragment  -->
+    <string name="enterFullNameText">আপনার পুরো নাম লিখুন</string>
+    <string name="enterEmailMobileText">আপনার ফোন বা ইমেল টাইপ করুন</string>
+    <string name="invalidFullNameText">সম্পূর্ণ নামটি সঠিক হয় নাই</string>
+    <string name="invalidMobileEmailText">মোবাইল বা ইমেইল সঠিক নয়</string>
+
+    <!--  Otp Fragment  -->
+    <string name="verifyCodeText">কোড যাচাই করুন</string>
+    <string name="sendOtpAccountSmgText">আপনার অ্যাকাউন্টে একটি যাচাইকরণ কোড পাঠানো হয়েছে। +8801799*****26 নিচের কোডটি যাচাই করুন।</string>
+    <string name="didNotGetCodeText">আমি কোন কোড পাইনি?</string>
+    <string name="sendAgainCodeText">আবার পাঠান</string>
+
+    <!--  Gender Fragment  -->
+    <string name="step3_4Text">৩/৪</string>
+    <string name="selectGenderText">লিংঙ্গ নির্বাচন</string>
+    <string name="maleText">পুরুষ</string>
+    <string name="feMaleText">মহিলা</string>
+    <string name="otherGenderText">অন্যান্য</string>
+    <string name="selectAgeText">বয়স নির্বাচন করুন</string>
+    <string name="selectGenderAgeText">লিঙ্গ এবং বয়স নির্বাচন করুন।</string>
+
+    <!--  Password Fragment  -->
+    <string name="step4_4Text">৪/৪</string>
+    <string name="createPasswordText">পাসওয়ার্ড তৈরি করুন</string>
+    <string name="enterNewPasswordText">নতুন পাসওয়ার্ড তৈরি করুন</string>
+    <string name="confirmPasswordText">পাসওয়ার্ড নিশ্চিত করুন</string>
+    <string name="createYourAccountText">অ্যাকাউন্ট তৈরী করুন</string>
+    <string name="errorPasswordMatchText">পাসওয়ার্ড মেলে নাই!</string>
+    <string name="errorPasswordText">পাসওয়ার্ড ৮ ডিজিট এবং অক্ষর হতে হবে!</string>
+
+    <!--  Account Find Fragment  -->
+    <string name="findAccountText">আপনার অ্যাকাউন্ট খুঁজুন</string>
+
+    <!--  Common text related activity  -->
+    <string name="signInText">সাইন ইন করুন</string>
+    <string name="signUpText">নিবন্ধন করুন</string>
+    <string name="emailMobileUsernameText">ইমেল/মোবাইল/ইউজারনেইম</string>
+    <string name="passwordText">পাসওয়ার্ড</string>
+    <string name="emptyFieldText">এই ক্ষেত্রটি খালি রাখা যাবে না</string>
+    <string name="commonCreateAccountText">অ্যাকাউন্ট\nতৈরি</string>
+
+    <!--  TODO:: Main Activity text -->
+    <!--  Navigation Text  -->
+    <string name="sloganApplicationText">বই পড়ুন বই মনের পরিধি বাড়িয়ে দেয়</string>
+    <string name="navHomeText">হোম</string>
+    <string name="navMyBooksText">আমার বই</string>
+    <string name="navDownloadText">ডাউনলোড</string>
+
+    <string name="navMyFeedText">আমার ফিড</string>
+    <string name="navFavoriteBooksText">পছন্দের বই</string>
+    <string name="navWorkFlowText">ওয়ার্ক ফ্লো</string>
+    <string name="navUpdateText">আপডেট</string>
+    <string name="navCatAppToolsText">অ্যাপ্লিকেশন টুল</string>
+    <string name="navPrivacyPolicyText">প্রাইভেসি পলিসি</string>
+    <string name="navTermsConditionsText">শর্তাবলী</string>
+    <string name="navSettingText">সেটিংস</string>
+    <string name="navCatCommunicationText">যোগাযোগ</string>
+    <string name="navContactUsText">যোগাযোগ করুন</string>
+    <string name="navFaqText">FAQ</string>
+    <string name="navInviteFriendsText">বন্ধুদের আমন্ত্রণ জানান</string>
+    <string name="navShareText">শেয়ার করুন</string>
+
+    <string name="openNavigationText">নেভিগেশন খোলা</string>
+    <string name="closeNavigationText">নেভিগেশন বন্ধ</string>
+
+    <!--  NavHome Fragment Text  -->
+    <string name="allBooksText">সব বই</string>
+    <string name="favoriteBooksText">প্রিয় বই</string>
+    <string name="popularBooksText">জনপ্রিয়</string>
+
+    <!--  Create Book Fragment Text  -->
+    <string name="createBookText">বই তৈরি</string>
+    <string name="createYourBookText">বই তৈরি করুন</string>
+    <string name="notSetText">সেট করা হয় নাই</string>
+
+    <!--  TODO:: Setting Activity text -->
+    <string name="commonDefaultText">ডিফল্ট</string>
+    <string name="nightModeText">নাইড মুড</string>
+    <string name="selectSystemText">সিস্টেম</string>
+    <string name="selectLightText">লাইট</string>
+    <string name="selectNightText">ডার্ক</string>
+
+    <string name="themeText">থিম</string>
+
+    <string name="fontSizeText">ফন্ট সাইজ</string>
+    <string name="selectSmallText">ছোট</string>
+    <string name="selectMediumText">মেডিয়াম</string>
+    <string name="selectLargeText">বড়</string>
+
+    <string name="languageText">ভাষা</string>
+    <string name="selectLocateText">Locate</string>
+    <string name="selectBanglaText">বাংলা</string>
+    <string name="selectEnglishText">English</string>
+
+    <string name="notificationsText">নোটিফিকেশন</string>
+
+</resources>
