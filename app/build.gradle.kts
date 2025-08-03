@@ -20,14 +20,12 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-
             /**
              * Publish app then uncomment the code
              * isMinifyEnabled = true
              * isShrinkResources = true
              * isDebuggable = false
              */
-
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
             )
@@ -46,8 +44,6 @@ android {
 }
 
 dependencies {
-
-
     /** TODO: Google Play Service */
     implementation("com.google.android.gms:play-services-location:21.1.0")
 
@@ -56,7 +52,6 @@ dependencies {
 
     /** TODO: lottie Animations */
     implementation ("com.airbnb.android:lottie:6.3.0")
-
 
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("androidx.core:core-ktx:1.12.0")
