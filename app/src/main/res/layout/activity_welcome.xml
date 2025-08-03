@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".design.ui.activities.WelcomeActivity">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/introViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomButtonLayout" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/introTabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/positive_016dp"
+        android:layout_marginBottom="@dimen/positive_016dp"
+        android:background="@android:color/transparent"
+        app:tabBackground="@drawable/slider_selector"
+        app:tabGravity="center"
+        app:tabIndicatorHeight="0dp" />
+
+    <RelativeLayout
+        android:id="@+id/bottomButtonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/positive_016dp"
+        android:paddingHorizontal="@dimen/positive_016dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/introNextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="@string/nextText"
+            android:textSize="@dimen/positive_012sp"
+            android:textStyle="normal" />
+
+        <com.sopnolikhi.booksmyfriend.design.ui.custom.AnimationButton
+            android:id="@+id/animButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/positive_014sp"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
