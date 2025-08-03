@@ -1,6 +1,6 @@
-# BooksMyFriend
+# Books my friend kotlin app
 
-BooksMyFriend is an Android application that allows users to browse and read books.
+Books my friend is an Android application that allows users to browse and read books.
 
 ## Features
 
