@@ -56,10 +56,6 @@ This app requires the following permissions:
 
 ## Contributing
 
-Pull requests are welcome. 
-
-## Contributing
-
 Contributions are always welcome! If you have suggestions for improvements or new features, please open an issue or submit a pull request.
 You can also help by reporting bugs, improving documentation, or suggesting new features.
 If you want to contribute, please fork the repository and create a new branch for your feature or fix. After making your changes, submit a pull request with a clear description of what you have done and why it is needed.
