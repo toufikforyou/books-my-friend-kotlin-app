@@ -65,5 +65,4 @@ See [contributing](./docs/contributing.md) for ways to get started.
 Please adhere to this project's [Code of Conduct](./docs/CODE_OF_CONDUCT.md).
 
 ## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
