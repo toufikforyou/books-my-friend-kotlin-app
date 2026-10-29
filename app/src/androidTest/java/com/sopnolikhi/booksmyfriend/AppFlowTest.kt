@@ -2,6 +2,7 @@ package com.sopnolikhi.booksmyfriend
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.view.View
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onIdle
@@ -19,6 +20,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.sopnolikhi.booksmyfriend.design.ui.activities.WelcomeActivity
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
 import org.junit.Before
 import org.junit.Test
@@ -45,7 +47,7 @@ class AppFlowTest {
     fun newReaderCanOnboardBrowseAndRead() {
         ActivityScenario.launch(WelcomeActivity::class.java).use {
             // Onboarding
-            onView(withText(R.string.onboardingTitle1)).check(matches(isDisplayed()))
+            waitUntilDisplayed(withText(R.string.onboardingTitle1))
             screenshot("01_onboarding")
             onView(withId(R.id.introNextButton)).perform(click())
             onView(withId(R.id.introNextButton)).perform(click())
@@ -115,6 +117,20 @@ class AppFlowTest {
             screenshot("13_profile_dark")
             onView(withId(R.id.navigationHome)).perform(click())
             screenshot("14_home_dark")
+        }
+    }
+
+    /** Waits for the first screen: right after boot the window can take a while to get focus. */
+    private fun waitUntilDisplayed(matcher: Matcher<View>, timeoutMs: Long = 30_000) {
+        val deadline = System.currentTimeMillis() + timeoutMs
+        while (true) {
+            try {
+                onView(matcher).check(matches(isDisplayed()))
+                return
+            } catch (error: Throwable) {
+                if (System.currentTimeMillis() > deadline) throw error
+                Thread.sleep(500)
+            }
         }
     }
 

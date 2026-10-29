@@ -7,6 +7,14 @@ OUT=device-results
 PKG=com.sopnolikhi.booksmyfriend
 mkdir -p "$OUT/screenshots"
 
+# A freshly booted emulator can still show the lock screen or a system dialog that steals
+# window focus from the app under test; settle it first.
+adb shell wm dismiss-keyguard || true
+adb shell input keyevent 82 || true
+adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS || true
+sleep 10
+adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS || true
+
 TESTS_OK=true
 ./gradlew connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true || TESTS_OK=false
 if [ "$TESTS_OK" = false ]; then
