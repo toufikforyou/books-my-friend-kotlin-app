@@ -76,31 +76,6 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: bash .github/scripts/device-checks.sh
 
-      - name: Print screenshot previews
-        if: always()
-        continue-on-error: true
-        run: |
-          # Small JPEG previews, base64-encoded, so key screens can be reviewed from the log alone.
-          python3 -m pip install --quiet pillow
-          python3 - <<'PY'
-          import base64, glob, io, os
-          from PIL import Image
-          keep = ("01_", "04_", "05_", "06_", "07_", "10_", "12_", "14_")
-          for path in sorted(glob.glob("device-results/screenshots/*.png")):
-              name = os.path.basename(path)[:-4]
-              if not name.startswith(keep):
-                  continue
-              img = Image.open(path).convert("RGB")
-              img.thumbnail((360, 800))
-              buf = io.BytesIO()
-              img.save(buf, "JPEG", quality=50)
-              data = base64.b64encode(buf.getvalue()).decode()
-              print("SHOT-BEGIN", name)
-              for i in range(0, len(data), 4000):
-                  print(data[i:i + 4000])
-              print("SHOT-END")
-          PY
-
       - name: Upload screenshots & logs
         if: always()
         uses: actions/upload-artifact@v5
