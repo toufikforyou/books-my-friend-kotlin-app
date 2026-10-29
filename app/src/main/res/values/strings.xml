@@ -136,4 +136,84 @@
     <string name="create_book_notification_channel_id" translatable="false">171278207503</string>
     <string name="create_book_notification_channel_name" translatable="false">Create Book</string>
     <string name="create_book_notification_channel_desc" translatable="false">Channel for important create new books</string>
+
+    <!--  TODO:: Redesign 2026 -->
+    <string name="skipText">Skip</string>
+    <string name="onboardingTitle1">Your pocket library</string>
+    <string name="onboardingBody1">Timeless classics and Bangla favourites, ready whenever you have a quiet moment.</string>
+    <string name="onboardingTitle2">Read your way</string>
+    <string name="onboardingBody2">Pick a comfortable text size and a paper, sepia or night page. Your eyes will thank you.</string>
+    <string name="onboardingTitle3">Pick up where you left off</string>
+    <string name="onboardingBody3">We remember your place in every book, so the next chapter is always one tap away.</string>
+    <string name="authTitle">Welcome, reader</string>
+    <string name="authSubtitle">What should we call you? We use your name to make your shelf feel like home. No account or password needed.</string>
+    <string name="yourNameText">Your name</string>
+    <string name="startReadingText">Start reading</string>
+    <string name="skipForNowText">Skip for now</string>
+    <string name="nameTooShortText">Please type at least 2 letters</string>
+    <string name="privacyNoteText">Everything stays on this phone.</string>
+    <string name="greetingMorning">Good morning</string>
+    <string name="greetingAfternoon">Good afternoon</string>
+    <string name="greetingEvening">Good evening</string>
+    <string name="greetingNight">Reading late tonight?</string>
+    <string name="defaultReaderName">Reader</string>
+    <string name="searchHint">Search titles or authors</string>
+    <string name="continueReadingText">Continue reading</string>
+    <string name="continueText">Continue</string>
+    <string name="percentReadFormat">%1$d%% read</string>
+    <string name="popularThisWeekText">Popular this week</string>
+    <string name="recommendedText">Picked for you</string>
+    <string name="seeAllText">See all</string>
+    <string name="allCategoriesText">All</string>
+    <string name="categoryClassicsText">Classics</string>
+    <string name="categoryAdventureText">Adventure</string>
+    <string name="categoryMysteryText">Mystery</string>
+    <string name="categoryChildrenText">Children</string>
+    <string name="categoryBanglaText">Bangla</string>
+    <string name="navExploreText">Explore</string>
+    <string name="navLibraryText">Library</string>
+    <string name="navProfileText">Profile</string>
+    <string name="exploreTitle">Explore</string>
+    <string name="noResultsTitle">No books found</string>
+    <string name="noResultsBody">Try a different word or another category.</string>
+    <string name="libraryTitle">My library</string>
+    <string name="readingTabText">Reading</string>
+    <string name="savedTabText">Saved</string>
+    <string name="emptyReadingTitle">Nothing on the go yet</string>
+    <string name="emptyReadingBody">Open any book and we will keep your place here.</string>
+    <string name="emptySavedTitle">Your shelf is empty</string>
+    <string name="emptySavedBody">Tap the bookmark on a book you like to save it for later.</string>
+    <string name="browseBooksText">Browse books</string>
+    <string name="minutesReadFormat">%1$d min read</string>
+    <string name="aboutBookText">About this book</string>
+    <string name="sampleChapterText">Free sample chapter</string>
+    <string name="startReadingButton">Start reading</string>
+    <string name="continueReadingFormat">Continue · %1$d%%</string>
+    <string name="readAgainText">Read again</string>
+    <string name="saveBookText">Save to library</string>
+    <string name="removeBookText">Remove from library</string>
+    <string name="savedToLibraryText">Saved to your library</string>
+    <string name="removedFromLibraryText">Removed from your library</string>
+    <string name="readingSettingsText">Reading settings</string>
+    <string name="textSizeText">Text size</string>
+    <string name="pageColorText">Page colour</string>
+    <string name="pagePaperText">Paper</string>
+    <string name="pageSepiaText">Sepia</string>
+    <string name="pageNightText">Night</string>
+    <string name="endOfSampleText">You reached the end of this sample. Thank you for reading!</string>
+    <string name="backText">Back</string>
+    <string name="profileStatsFormat">%1$d reading · %2$d saved · %3$d finished</string>
+    <string name="appearanceText">Appearance</string>
+    <string name="wallpaperColorsText">Use wallpaper colours</string>
+    <string name="wallpaperColorsSummary">Match the app to your phone\'s colours</string>
+    <string name="aboutText">About</string>
+    <string name="versionFormat">Version %1$s</string>
+    <string name="signOutText">Sign out</string>
+    <string name="signOutConfirmTitle">Sign out?</string>
+    <string name="signOutConfirmBody">Your name, saved books and reading progress on this phone will be cleared.</string>
+    <string name="cancelText">Cancel</string>
+    <string name="bookCoverDescription">Cover of %1$s by %2$s</string>
+    <string name="ratingFormat" translatable="false">%1$.1f</string>
+    <string name="textSizeDecrease">Smaller text</string>
+    <string name="textSizeIncrease">Larger text</string>
 </resources>

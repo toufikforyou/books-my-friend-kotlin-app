@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detailRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    android:orientation="vertical"
+    tools:context=".design.ui.activities.BookDetailActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/detailToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:navigationContentDescription="@string/backText"
+        app:navigationIcon="@drawable/ic_arrow_back" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/positive_024dp"
+            android:paddingBottom="@dimen/positive_024dp">
+
+            <com.sopnolikhi.booksmyfriend.design.ui.custom.BookCoverView
+                android:id="@+id/detailCover"
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_008dp"
+                android:elevation="8dp" />
+
+            <TextView
+                android:id="@+id/detailTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_024dp"
+                android:accessibilityHeading="true"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                android:textColor="?attr/colorOnSurface"
+                tools:targetApi="28"
+                tools:text="Pride and Prejudice" />
+
+            <TextView
+                android:id="@+id/detailAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_004dp"
+                android:gravity="center"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="Jane Austen" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/detailFacts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_016dp"
+                app:chipSpacingHorizontal="@dimen/positive_008dp">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/ratingChip"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    app:chipIcon="@drawable/ic_star"
+                    app:chipIconTint="?attr/colorTertiary"
+                    tools:text="4.8" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/lengthChip"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    app:chipIcon="@drawable/ic_schedule"
+                    app:chipIconTint="?attr/colorPrimary"
+                    tools:text="3 min read" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/categoryChip"
+                    style="@style/Widget.Material3.Chip.Assist"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="false"
+                    tools:text="Classics" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_024dp"
+                android:accessibilityHeading="true"
+                android:text="@string/aboutBookText"
+                android:textAppearance="?attr/textAppearanceTitleLarge"
+                android:textColor="?attr/colorOnSurface"
+                tools:targetApi="28" />
+
+            <TextView
+                android:id="@+id/detailDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_008dp"
+                android:lineSpacingMultiplier="1.3"
+                android:textAppearance="?attr/textAppearanceBodyLarge"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                tools:text="Elizabeth Bennet is clever, quick to judge and in no hurry to marry." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_016dp"
+                android:drawablePadding="@dimen/positive_008dp"
+                android:gravity="center_vertical"
+                android:text="@string/sampleChapterText"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorPrimary"
+                app:drawableStartCompat="@drawable/ic_check_circle"
+                app:drawableTint="?attr/colorPrimary" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- Actions stay within thumb reach at the bottom. -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurfaceContainer"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/positive_020dp"
+        android:paddingVertical="@dimen/positive_012dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/saveButton"
+            style="@style/Widget.Material3.Button.IconButton.Outlined"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:contentDescription="@string/saveBookText"
+            app:icon="@drawable/ic_bookmark_border"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/readButton"
+            style="@style/Widget.BMF.Button.Large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/positive_012dp"
+            android:layout_weight="1"
+            android:text="@string/startReadingButton" />
+
+    </LinearLayout>
+</LinearLayout>

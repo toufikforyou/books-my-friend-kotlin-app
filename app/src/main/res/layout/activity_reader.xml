@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/readerRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/reader_paper_background"
+    tools:context=".design.ui.activities.ReaderActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/readerScroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/positive_024dp">
+
+            <TextView
+                android:id="@+id/readerChapter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/positive_016dp"
+                android:accessibilityHeading="true"
+                android:maxWidth="680dp"
+                android:textAppearance="?attr/textAppearanceHeadlineSmall"
+                tools:targetApi="28"
+                tools:text="Chapter 1" />
+
+            <TextView
+                android:id="@+id/readerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/positive_016dp"
+                android:breakStrategy="high_quality"
+                android:hyphenationFrequency="normal"
+                android:lineSpacingMultiplier="1.55"
+                android:maxWidth="680dp"
+                android:textIsSelectable="false"
+                tools:targetApi="23"
+                tools:text="It is a truth universally acknowledged…" />
+
+            <TextView
+                android:id="@+id/readerEnd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/positive_040dp"
+                android:layout_marginBottom="@dimen/positive_024dp"
+                android:gravity="center"
+                android:text="@string/endOfSampleText"
+                android:textAppearance="?attr/textAppearanceBodyMedium" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/readerToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:minHeight="?attr/actionBarSize"
+        app:menu="@menu/reader_menu"
+        app:navigationContentDescription="@string/backText"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:titleTextAppearance="?attr/textAppearanceTitleMedium" />
+
+    <LinearLayout
+        android:id="@+id/readerBottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/positive_024dp"
+        android:paddingVertical="@dimen/positive_012dp">
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/readerProgress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:importantForAccessibility="no"
+            android:max="100"
+            app:trackCornerRadius="4dp"
+            app:trackThickness="4dp" />
+
+        <TextView
+            android:id="@+id/readerPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/positive_012dp"
+            android:textAppearance="?attr/textAppearanceLabelMedium"
+            tools:text="34% read" />
+
+    </LinearLayout>
+</FrameLayout>

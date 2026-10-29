@@ -100,7 +100,7 @@
 
     <!--  TODO:: Setting Activity text -->
     <string name="commonDefaultText">ডিফল্ট</string>
-    <string name="nightModeText">নাইড মুড</string>
+    <string name="nightModeText">নাইট মোড</string>
     <string name="selectSystemText">সিস্টেম</string>
     <string name="selectLightText">লাইট</string>
     <string name="selectNightText">ডার্ক</string>
@@ -119,4 +119,83 @@
 
     <string name="notificationsText">নোটিফিকেশন</string>
 
+
+    <!--  TODO:: Redesign 2026 -->
+    <string name="skipText">এড়িয়ে যান</string>
+    <string name="onboardingTitle1">পকেটের লাইব্রেরি</string>
+    <string name="onboardingBody1">চিরকালের ক্লাসিক আর প্রিয় বাংলা গল্প, অবসরের যেকোনো মুহূর্তে হাতের কাছে।</string>
+    <string name="onboardingTitle2">নিজের মতো করে পড়ুন</string>
+    <string name="onboardingBody2">আরামদায়ক লেখার আকার আর কাগজ, সেপিয়া বা রাতের পাতা বেছে নিন। চোখ আরাম পাবে।</string>
+    <string name="onboardingTitle3">যেখানে থেমেছিলেন, সেখান থেকেই</string>
+    <string name="onboardingBody3">প্রতিটি বইয়ে আপনি কোথায় ছিলেন আমরা মনে রাখি, তাই পরের অধ্যায় মাত্র এক ট্যাপ দূরে।</string>
+    <string name="authTitle">স্বাগতম, পাঠক</string>
+    <string name="authSubtitle">আপনাকে কী নামে ডাকব? আপনার নাম দিয়ে বইয়ের তাকটা আপন করে সাজাই। কোনো অ্যাকাউন্ট বা পাসওয়ার্ড লাগবে না।</string>
+    <string name="yourNameText">আপনার নাম</string>
+    <string name="startReadingText">পড়া শুরু করুন</string>
+    <string name="skipForNowText">এখন নয়</string>
+    <string name="nameTooShortText">অন্তত ২টি অক্ষর লিখুন</string>
+    <string name="privacyNoteText">সবকিছু এই ফোনেই থাকে।</string>
+    <string name="greetingMorning">শুভ সকাল</string>
+    <string name="greetingAfternoon">শুভ অপরাহ্ন</string>
+    <string name="greetingEvening">শুভ সন্ধ্যা</string>
+    <string name="greetingNight">আজ রাত জেগে পড়ছেন?</string>
+    <string name="defaultReaderName">পাঠক</string>
+    <string name="searchHint">বই বা লেখকের নাম খুঁজুন</string>
+    <string name="continueReadingText">পড়া চালিয়ে যান</string>
+    <string name="continueText">চালিয়ে যান</string>
+    <string name="percentReadFormat">%1$d%% পড়া হয়েছে</string>
+    <string name="popularThisWeekText">এই সপ্তাহের জনপ্রিয়</string>
+    <string name="recommendedText">আপনার জন্য বাছাই</string>
+    <string name="seeAllText">সব দেখুন</string>
+    <string name="allCategoriesText">সব</string>
+    <string name="categoryClassicsText">ক্লাসিক</string>
+    <string name="categoryAdventureText">অ্যাডভেঞ্চার</string>
+    <string name="categoryMysteryText">রহস্য</string>
+    <string name="categoryChildrenText">শিশুতোষ</string>
+    <string name="categoryBanglaText">বাংলা</string>
+    <string name="navExploreText">খুঁজুন</string>
+    <string name="navLibraryText">লাইব্রেরি</string>
+    <string name="navProfileText">প্রোফাইল</string>
+    <string name="exploreTitle">খুঁজুন</string>
+    <string name="noResultsTitle">কোনো বই পাওয়া যায়নি</string>
+    <string name="noResultsBody">অন্য কোনো শব্দ বা বিভাগ দিয়ে চেষ্টা করুন।</string>
+    <string name="libraryTitle">আমার লাইব্রেরি</string>
+    <string name="readingTabText">পড়ছি</string>
+    <string name="savedTabText">সংরক্ষিত</string>
+    <string name="emptyReadingTitle">এখনো কিছু পড়া শুরু হয়নি</string>
+    <string name="emptyReadingBody">যেকোনো বই খুলুন, আপনি কোথায় ছিলেন আমরা এখানে মনে রাখব।</string>
+    <string name="emptySavedTitle">আপনার তাক খালি</string>
+    <string name="emptySavedBody">পছন্দের বইয়ের বুকমার্কে ট্যাপ করে পরে পড়ার জন্য রেখে দিন।</string>
+    <string name="browseBooksText">বই দেখুন</string>
+    <string name="minutesReadFormat">%1$d মিনিটের পড়া</string>
+    <string name="aboutBookText">বইটি সম্পর্কে</string>
+    <string name="sampleChapterText">বিনামূল্যে নমুনা অধ্যায়</string>
+    <string name="startReadingButton">পড়া শুরু করুন</string>
+    <string name="continueReadingFormat">চালিয়ে যান · %1$d%%</string>
+    <string name="readAgainText">আবার পড়ুন</string>
+    <string name="saveBookText">লাইব্রেরিতে রাখুন</string>
+    <string name="removeBookText">লাইব্রেরি থেকে সরান</string>
+    <string name="savedToLibraryText">আপনার লাইব্রেরিতে রাখা হয়েছে</string>
+    <string name="removedFromLibraryText">আপনার লাইব্রেরি থেকে সরানো হয়েছে</string>
+    <string name="readingSettingsText">পড়ার সেটিংস</string>
+    <string name="textSizeText">লেখার আকার</string>
+    <string name="pageColorText">পাতার রং</string>
+    <string name="pagePaperText">কাগজ</string>
+    <string name="pageSepiaText">সেপিয়া</string>
+    <string name="pageNightText">রাত</string>
+    <string name="endOfSampleText">নমুনার শেষে পৌঁছে গেছেন। পড়ার জন্য ধন্যবাদ!</string>
+    <string name="backText">ফিরে যান</string>
+    <string name="profileStatsFormat">%1$d পড়ছেন · %2$d সংরক্ষিত · %3$d শেষ</string>
+    <string name="appearanceText">চেহারা</string>
+    <string name="wallpaperColorsText">ওয়ালপেপারের রং ব্যবহার করুন</string>
+    <string name="wallpaperColorsSummary">অ্যাপটিকে ফোনের রঙের সাথে মিলিয়ে নিন</string>
+    <string name="aboutText">সম্পর্কে</string>
+    <string name="versionFormat">সংস্করণ %1$s</string>
+    <string name="signOutText">সাইন আউট</string>
+    <string name="signOutConfirmTitle">সাইন আউট করবেন?</string>
+    <string name="signOutConfirmBody">এই ফোনে আপনার নাম, সংরক্ষিত বই আর পড়ার অগ্রগতি মুছে যাবে।</string>
+    <string name="cancelText">বাতিল</string>
+    <string name="bookCoverDescription">%2$s এর লেখা %1$s বইয়ের প্রচ্ছদ</string>
+    <string name="textSizeDecrease">ছোট লেখা</string>
+    <string name="textSizeIncrease">বড় লেখা</string>
 </resources>
