@@ -173,6 +173,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/textSizeText"
                     android:stepSize="1"
+                    app:tickVisible="false"
                     android:valueFrom="14"
                     android:valueTo="30" />
 

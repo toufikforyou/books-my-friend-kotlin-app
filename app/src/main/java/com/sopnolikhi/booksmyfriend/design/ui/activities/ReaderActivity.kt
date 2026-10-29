@@ -166,7 +166,7 @@ class ReaderActivity : AppCompatActivity() {
         val backgroundColor = ContextCompat.getColor(this, background)
         val textColor = ContextCompat.getColor(this, text)
         val mutedColor = ColorUtils.setAlphaComponent(textColor, 0xB3)
-        val barColor = ColorUtils.setAlphaComponent(backgroundColor, 0xF2)
+        val barColor = backgroundColor
 
         binding.readerRoot.setBackgroundColor(backgroundColor)
         binding.readerToolbar.setBackgroundColor(barColor)

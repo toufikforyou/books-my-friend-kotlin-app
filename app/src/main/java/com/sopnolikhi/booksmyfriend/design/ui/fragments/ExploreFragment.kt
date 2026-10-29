@@ -38,7 +38,7 @@ class ExploreFragment : Fragment(), ScrollableTab {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.exploreRoot.applySystemBarPadding(bottom = false)
 
-        val columnWidthDp = 140
+        val columnWidthDp = 120
         val screenWidthDp = resources.configuration.screenWidthDp
         binding.exploreGrid.layoutManager = GridLayoutManager(requireContext(), (screenWidthDp / columnWidthDp).coerceIn(2, 6))
         binding.exploreGrid.adapter = adapter

@@ -198,4 +198,5 @@
     <string name="bookCoverDescription">%2$s এর লেখা %1$s বইয়ের প্রচ্ছদ</string>
     <string name="textSizeDecrease">ছোট লেখা</string>
     <string name="textSizeIncrease">বড় লেখা</string>
+    <string name="justStartedText">সবে শুরু</string>
 </resources>

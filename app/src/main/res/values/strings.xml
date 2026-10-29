@@ -216,4 +216,5 @@
     <string name="ratingFormat" translatable="false">%1$.1f</string>
     <string name="textSizeDecrease">Smaller text</string>
     <string name="textSizeIncrease">Larger text</string>
+    <string name="justStartedText">Just started</string>
 </resources>

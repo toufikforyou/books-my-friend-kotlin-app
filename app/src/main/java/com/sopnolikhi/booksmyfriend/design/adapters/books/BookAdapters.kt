@@ -76,7 +76,11 @@ class BookRowAdapter(
             bookProgressText.isVisible = percent != null
             if (percent != null) {
                 bookProgress.progress = percent
-                bookProgressText.text = context.getString(R.string.percentReadFormat, percent)
+                bookProgressText.text = if (percent == 0) {
+                    context.getString(R.string.justStartedText)
+                } else {
+                    context.getString(R.string.percentReadFormat, percent)
+                }
             }
             root.setOnClickListener { onClick(book) }
         }

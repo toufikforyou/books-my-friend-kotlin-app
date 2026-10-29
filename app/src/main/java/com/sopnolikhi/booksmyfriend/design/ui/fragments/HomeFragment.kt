@@ -85,7 +85,8 @@ class HomeFragment : Fragment(), ScrollableTab {
             binding.continueTitle.text = current.title
             binding.continueAuthor.text = current.author
             binding.continueProgress.progress = percent
-            binding.continuePercent.text = getString(R.string.percentReadFormat, percent)
+            binding.continuePercent.text =
+                if (percent == 0) getString(R.string.justStartedText) else getString(R.string.percentReadFormat, percent)
             val open = View.OnClickListener { ReaderActivity.start(requireContext(), current.id) }
             binding.continueCard.setOnClickListener(open)
             binding.continueButton.setOnClickListener(open)

@@ -88,6 +88,7 @@ class BookCoverView @JvmOverloads constructor(
         val titleLayout = StaticLayout.Builder
             .obtain(b.title, 0, b.title.length, titlePaint, textWidth)
             .setAlignment(Layout.Alignment.ALIGN_NORMAL)
+            .setLineSpacing(0f, 0.88f)
             .setMaxLines(4)
             .setEllipsize(TextUtils.TruncateAt.END)
             .build()
