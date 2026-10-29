@@ -1,7 +1,8 @@
 name: Release
 
-# Publishes a GitHub release after "Android CI" passes on main, whenever versionName
-# in app/build.gradle.kts has no matching v<versionName> tag yet.
+# After "Android CI" passes on a push to main, publish the next GitHub release.
+# Versions are YEAR.MONTH.<bmf.versionBase>.<build>, e.g. 2026.10.1.0.0, 2026.10.1.0.1, ...
+# The build number restarts at 0 each month (or when bmf.versionBase changes).
 on:
   workflow_run:
     workflows: [ "Android CI" ]
@@ -21,39 +22,48 @@ jobs:
     name: Build & publish release
     if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
     runs-on: ubuntu-latest
+    env:
+      RELEASE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          ref: ${{ env.RELEASE_SHA }}
           fetch-depth: 0
 
-      - name: Read version
+      - name: Work out the next version
         id: version
         run: |
-          name=$(sed -nE 's/^\s*versionName = "([^"]+)".*/\1/p' app/build.gradle.kts | head -1)
-          code=$(sed -nE 's/^\s*versionCode = ([0-9]+).*/\1/p' app/build.gradle.kts | head -1)
+          if git tag --points-at HEAD | grep -q '^v'; then
+            echo "This commit is already released as $(git tag --points-at HEAD | grep '^v' | head -1)."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          base=$(sed -nE 's/^bmf\.versionBase=([0-9.]+)\s*$/\1/p' gradle.properties)
+          prefix="$(date -u +%Y).$(date -u +%-m).$base"
+          last=$(git tag -l "v$prefix.*" | sed "s/^v$prefix\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
+          build=$(( ${last:--1} + 1 ))
+          name="$prefix.$build"
+          # versionCode must always grow: one more than the number of earlier dated releases (2 was v2.0.0).
+          count=$(git tag -l 'v*' | grep -cE '^v[0-9]{4}\.[0-9]+\.[0-9.]+$' || true)
+          code=$(( 3 + count ))
+          echo "skip=false" >> "$GITHUB_OUTPUT"
           echo "name=$name" >> "$GITHUB_OUTPUT"
           echo "code=$code" >> "$GITHUB_OUTPUT"
           echo "tag=v$name" >> "$GITHUB_OUTPUT"
-          if git rev-parse -q --verify "refs/tags/v$name" >/dev/null; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
-            echo "Tag v$name already exists; nothing to release."
-          else
-            echo "exists=false" >> "$GITHUB_OUTPUT"
-          fi
+          echo "Next release: v$name (versionCode $code)"
 
       - uses: actions/setup-java@v5
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
         with:
           distribution: temurin
           java-version: 17
 
       - uses: gradle/actions/setup-gradle@v5
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
 
       - name: Decode signing key
         id: signing
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
         env:
           KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
@@ -62,63 +72,60 @@ jobs:
             echo "BMF_KEYSTORE_FILE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
             echo "signed=true" >> "$GITHUB_OUTPUT"
           else
-            echo "::warning::KEYSTORE_BASE64 secret is not set. Publishing a test-signed pre-release instead."
+            echo "::warning::KEYSTORE_BASE64 secret is not set. The APK will be signed with a temporary key."
             echo "signed=false" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Build release APK and App Bundle
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
         env:
           BMF_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           BMF_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           BMF_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: ./gradlew assembleRelease bundleRelease
+        run: |
+          ./gradlew assembleRelease bundleRelease \
+            -Pbmf.versionName=${{ steps.version.outputs.name }} \
+            -Pbmf.versionCode=${{ steps.version.outputs.code }}
 
       - name: Collect release files
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
         run: |
           mkdir -p dist
           base="books-my-friend-${{ steps.version.outputs.tag }}"
+          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
           if [ "${{ steps.signing.outputs.signed }}" = "true" ]; then
             cp app/build/outputs/apk/release/app-release.apk "dist/$base.apk"
             cp app/build/outputs/bundle/release/app-release.aab "dist/$base.aab"
           else
-            # Without the release key, sign the APK with a throwaway key so it can still be
-            # installed for testing. Updates between test builds need an uninstall first.
-            keytool -genkeypair -keystore "$RUNNER_TEMP/test.jks" -storepass android -keypass android \
-              -alias test -keyalg RSA -keysize 2048 -validity 365 -dname "CN=Books My Friend test build"
-            BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+            keytool -genkeypair -keystore "$RUNNER_TEMP/temp.jks" -storepass android -keypass android \
+              -alias temp -keyalg RSA -keysize 2048 -validity 365 -dname "CN=Books My Friend"
             "$BUILD_TOOLS/zipalign" -f -p 4 app/build/outputs/apk/release/app-release-unsigned.apk "$RUNNER_TEMP/aligned.apk"
-            "$BUILD_TOOLS/apksigner" sign --ks "$RUNNER_TEMP/test.jks" --ks-pass pass:android \
-              --key-pass pass:android --ks-key-alias test --out "dist/$base-test-signed.apk" "$RUNNER_TEMP/aligned.apk"
+            "$BUILD_TOOLS/apksigner" sign --v4-signing-enabled false --ks "$RUNNER_TEMP/temp.jks" \
+              --ks-pass pass:android --key-pass pass:android --ks-key-alias temp \
+              --out "dist/$base.apk" "$RUNNER_TEMP/aligned.apk"
           fi
-          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
-          for apk in dist/*.apk; do "$BUILD_TOOLS/apksigner" verify --print-certs "$apk" | head -3; done
-          (cd dist && sha256sum * > SHA256SUMS.txt)
+          "$BUILD_TOOLS/apksigner" verify "dist/$base.apk"
+          "$BUILD_TOOLS/aapt2" dump badging "dist/$base.apk" | head -1
           ls -la dist
 
       - name: Publish GitHub release
-        if: steps.version.outputs.exists == 'false'
+        if: steps.version.outputs.skip == 'false'
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
-          tag="${{ steps.version.outputs.tag }}"
           {
             echo "## Books My Friend ${{ steps.version.outputs.name }}"
             echo
-            echo "Version code ${{ steps.version.outputs.code }} · built from \`${RELEASE_SHA::7}\` after all CI checks passed."
+            echo "Built from \`${RELEASE_SHA::7}\` after all CI checks passed."
             echo
-            if [ "${{ steps.signing.outputs.signed }}" = "true" ]; then
-              echo "Download the \`.apk\` to install on a phone, or upload the \`.aab\` to Google Play."
-            else
-              echo "> **Test build.** This APK is signed with a temporary key because the release signing secrets"
-              echo "> are not configured yet. Install it for testing; uninstall before installing a newer test build."
+            echo "Download the \`.apk\` below and open it on your Android phone to install."
+            if [ "${{ steps.signing.outputs.signed }}" != "true" ]; then
+              echo
+              echo "> Signed with a temporary key: if an older version is installed, uninstall it first."
             fi
           } > notes.md
-          prerelease=""
-          [ "${{ steps.signing.outputs.signed }}" = "true" ] || prerelease="--prerelease"
-          gh release create "$tag" dist/* \
+          shopt -s nullglob
+          gh release create "${{ steps.version.outputs.tag }}" dist/*.apk dist/*.aab \
             --target "$RELEASE_SHA" \
             --title "Books My Friend ${{ steps.version.outputs.name }}" \
-            --notes-file notes.md --generate-notes $prerelease
+            --notes-file notes.md --generate-notes --latest
