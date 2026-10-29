@@ -30,6 +30,18 @@ jobs:
           ref: ${{ env.RELEASE_SHA }}
           fetch-depth: 0
 
+      - name: Remove the old v2.0.0 pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # One-time cleanup from before the dated version scheme; a no-op once it is gone.
+          if gh release view v2.0.0 >/dev/null 2>&1; then
+            gh release delete v2.0.0 --cleanup-tag --yes
+          elif git rev-parse -q --verify refs/tags/v2.0.0 >/dev/null; then
+            git push origin :refs/tags/v2.0.0
+          fi
+          git tag -d v2.0.0 2>/dev/null || true
+
       - name: Work out the next version
         id: version
         run: |
@@ -43,7 +55,7 @@ jobs:
           last=$(git tag -l "v$prefix.*" | sed "s/^v$prefix\.//" | grep -E '^[0-9]+$' | sort -n | tail -1 || true)
           build=$(( ${last:--1} + 1 ))
           name="$prefix.$build"
-          # versionCode must always grow: one more than the number of earlier dated releases (2 was v2.0.0).
+          # versionCode must always grow: one more than the number of earlier dated releases (2 was the old v2.0.0).
           count=$(git tag -l 'v*' | grep -cE '^v[0-9]{4}\.[0-9]+\.[0-9.]+$' || true)
           code=$(( 3 + count ))
           echo "skip=false" >> "$GITHUB_OUTPUT"
