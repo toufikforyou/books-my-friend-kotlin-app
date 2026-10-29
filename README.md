@@ -4,20 +4,39 @@ Books my friend is an Android application (using kotlin) that allows users to br
 
 ## Features
 
-* Browse a wide variety of books
-* Read books directly within the app
-* User-friendly interface
+* **Gentle onboarding**: three calm intro pages you move through at your own pace, with a Skip button
+* **No account needed**: just tell the app your name (or skip) and start reading
+* **Home**: a personal greeting, a "Continue reading" card, popular books and category picks
+* **Explore**: search by title or author (English and Bangla) and filter by category
+* **Library**: books you are reading (with progress) and books you saved
+* **Reader**: distraction-free pages, tap to hide controls, adjustable text size,
+  paper / sepia / night page colours, and your place is saved automatically
+* **Profile**: light / dark / system theme, optional wallpaper colours (Android 12+),
+  English / বাংলা language switch, text size and sign out
+* Warm Material 3 design, edge-to-edge layouts, large touch targets and screen-reader labels
+* Works offline with bundled public-domain sample chapters
+
+## Tech stack
+
+* Kotlin, Android Views with ViewBinding and Material Components 3
+* Android Gradle Plugin 9.5 (built-in Kotlin), Kotlin 2.4, Gradle 9.8, Java 17
+* compileSdk 37, targetSdk 36, minSdk 24
+* Dependency versions live in [`gradle/libs.versions.toml`](gradle/libs.versions.toml)
 
 ## Dependencies
 
-* [Google Play Services Location](https://developers.google.com/android/guides/location-overview): Used for location-based services.
-* [Glide](https://github.com/bumptech/glide): An image loading and caching library for Android.
-* [Lottie](https://airbnb.io/lottie/): A library for parsing Adobe After Effects animations exported as json with Bodymovin and rendering them natively on mobile!
-* [AndroidX Core Splashscreen](https://developer.android.com/jetpack/androidx/releases/core): For creating a splash screen on app startup.
-* [AndroidX Core KTX](https://developer.android.com/kotlin/ktx): Kotlin extensions for Android.
-* [AndroidX AppCompat](https://developer.android.com/jetpack/androidx/releases/appcompat): Provides backward-compatible versions of standard Android framework APIs.
-* [Google Material Components](https://material.io/develop/android/docs/getting-started): A library for implementing Material Design.
-* [AndroidX ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout): A layout manager which allows you to position and size widgets in a flexible way.
+* [Google Material Components](https://github.com/material-components/material-components-android): Material 3 widgets and theming.
+* [AndroidX Core KTX](https://developer.android.com/kotlin/ktx), [AppCompat](https://developer.android.com/jetpack/androidx/releases/appcompat), [Activity](https://developer.android.com/jetpack/androidx/releases/activity), [Fragment](https://developer.android.com/jetpack/androidx/releases/fragment) and [Lifecycle](https://developer.android.com/jetpack/androidx/releases/lifecycle).
+* [AndroidX Core Splashscreen](https://developer.android.com/jetpack/androidx/releases/core): the animated launch screen.
+* [AndroidX ConstraintLayout](https://developer.android.com/jetpack/androidx/releases/constraintlayout), [RecyclerView](https://developer.android.com/jetpack/androidx/releases/recyclerview) and [ViewPager2](https://developer.android.com/jetpack/androidx/releases/viewpager2).
+* [Lottie](https://airbnb.io/lottie/): renders After Effects animations natively.
+
+## Continuous integration
+
+Every push runs [`.github/workflows/android.yml`](.github/workflows/android.yml): lint, unit tests,
+debug and R8-minified release builds, then an emulator job that walks through the whole app with
+Espresso (saving screenshots as a build artifact) and checks that the release build launches
+without crashing.
 
 ## Permissions
 
@@ -51,8 +70,8 @@ This app requires the following permissions:
 ## Getting Started
 
 1. Clone the repository.
-2. Open the project in Android Studio.
-3. Build and run the app.
+2. Open the project in Android Studio (a version that supports AGP 9.5) with JDK 17 or newer.
+3. Build and run the app, or from the command line: `./gradlew assembleDebug`.
 
 ## Contributing
 

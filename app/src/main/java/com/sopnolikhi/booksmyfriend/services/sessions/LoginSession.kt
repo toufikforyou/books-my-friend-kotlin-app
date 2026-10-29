@@ -15,6 +15,11 @@ object LoginSession {
     private const val KEY_USER_TOKEN = "Token"
     private const val KEY_USER_EXPIRED = "Expired"
 
+    private const val LOCAL_USER_ID = "local"
+    private const val LOCAL_USER_TOKEN = "local"
+    private const val SESSION_LENGTH_MILLIS = 365L * 24 * 60 * 60 * 1000
+    private val EXPIRY_FORMAT = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+
     private lateinit var sharedPreferences: SharedPreferences
 
     fun initialize(context: Context) {
@@ -39,14 +44,18 @@ object LoginSession {
         return hasUsername && hasToken && !isExpired(expiredTime)
     }
 
+    fun getUserName(): String = sharedPreferences.getString(KEY_USER_FULLNAME, "").orEmpty()
+
+    /** Keeps the reader signed in on this device for a year. */
+    fun saveLocalUser(name: String) {
+        val expiry = Date(System.currentTimeMillis() + SESSION_LENGTH_MILLIS)
+        saveLoginUserInfo(name, LOCAL_USER_ID, LOCAL_USER_TOKEN, EXPIRY_FORMAT.format(expiry))
+    }
+
     private fun isExpired(expiredTime: String?): Boolean = try {
-        val expirationDate = expiredTime?.let {
-            SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(
-                it
-            )
-        }
+        val expirationDate = expiredTime?.let { EXPIRY_FORMAT.parse(it) }
         Date().run {
-            if (after(expirationDate)) {
+            if (expirationDate == null || after(expirationDate)) {
                 logout()
                 true
             } else {
@@ -59,7 +68,7 @@ object LoginSession {
     }
 
 
-    private fun logout() {
+    fun logout() {
         with(sharedPreferences.edit()) {
             remove(KEY_USER_FULLNAME)
             remove(KEY_USER_ID)

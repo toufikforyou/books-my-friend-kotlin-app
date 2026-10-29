@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/emptyState"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/positive_032dp"
+    android:paddingVertical="@dimen/positive_040dp"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <TextView
+        android:id="@+id/emptyEmoji"
+        android:layout_width="112dp"
+        android:layout_height="112dp"
+        android:background="@drawable/bg_avatar"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:textSize="52sp"
+        tools:text="📖" />
+
+    <TextView
+        android:id="@+id/emptyTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/positive_020dp"
+        android:gravity="center"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="?attr/colorOnSurface"
+        tools:text="@string/emptySavedTitle" />
+
+    <TextView
+        android:id="@+id/emptyBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/positive_008dp"
+        android:gravity="center"
+        android:maxWidth="360dp"
+        android:textAppearance="?attr/textAppearanceBodyLarge"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        tools:text="@string/emptySavedBody" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/emptyAction"
+        style="@style/Widget.Material3.Button.TonalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/positive_020dp"
+        android:minHeight="48dp"
+        android:text="@string/browseBooksText"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</LinearLayout>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Typography: Anek Bangla for headings, Hind Siliguri for reading text. Both cover Latin and Bangla. -->
+    <style name="TextAppearance.BMF.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="fontFamily">@font/anek_bangla_bold</item>
+        <item name="android:fontFamily">@font/anek_bangla_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="fontFamily">@font/anek_bangla_bold</item>
+        <item name="android:fontFamily">@font/anek_bangla_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.HeadlineSmall" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="fontFamily">@font/anek_bangla_bold</item>
+        <item name="android:fontFamily">@font/anek_bangla_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
+        <item name="fontFamily">@font/anek_bangla_bold</item>
+        <item name="android:fontFamily">@font/anek_bangla_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="fontFamily">@font/hind_bold</item>
+        <item name="android:fontFamily">@font/hind_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.BodyLarge" parent="TextAppearance.Material3.BodyLarge">
+        <item name="fontFamily">@font/hind_regular</item>
+        <item name="android:fontFamily">@font/hind_regular</item>
+    </style>
+
+    <style name="TextAppearance.BMF.BodyMedium" parent="TextAppearance.Material3.BodyMedium">
+        <item name="fontFamily">@font/hind_regular</item>
+        <item name="android:fontFamily">@font/hind_regular</item>
+    </style>
+
+    <style name="TextAppearance.BMF.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="fontFamily">@font/hind_bold</item>
+        <item name="android:fontFamily">@font/hind_bold</item>
+    </style>
+
+    <style name="TextAppearance.BMF.SectionTitle" parent="TextAppearance.BMF.TitleLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="ShapeAppearance.BMF.Large" parent="ShapeAppearance.Material3.Corner.Large">
+        <item name="cornerSize">24dp</item>
+    </style>
+
+    <style name="Widget.BMF.Card" parent="Widget.Material3.CardView.Filled">
+        <item name="cardBackgroundColor">?attr/colorSurfaceContainerHigh</item>
+        <item name="cardCornerRadius">24dp</item>
+    </style>
+
+    <style name="Widget.BMF.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="chipMinTouchTargetSize">48dp</item>
+    </style>
+
+    <!-- Large, easy-to-hit primary call to action. -->
+    <style name="Widget.BMF.Button.Large" parent="Widget.Material3.Button">
+        <item name="android:minHeight">56dp</item>
+        <item name="android:textAppearance">@style/TextAppearance.BMF.LabelLarge</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Widget.BMF.SettingsLabel" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawablePadding">12dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:textAppearance">?attr/textAppearanceTitleMedium</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="drawableTint">?attr/colorPrimary</item>
+    </style>
+</resources>
