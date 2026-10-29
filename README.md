@@ -20,7 +20,7 @@ Books my friend is an Android application (using kotlin) that allows users to br
 
 * Kotlin, Android Views with ViewBinding and Material Components 3
 * Android Gradle Plugin 9.5 (built-in Kotlin), Kotlin 2.4, Gradle 9.8, Java 17
-* compileSdk / targetSdk 36, minSdk 24
+* compileSdk 37, targetSdk 36, minSdk 24
 * Dependency versions live in [`gradle/libs.versions.toml`](gradle/libs.versions.toml)
 
 ## Dependencies
