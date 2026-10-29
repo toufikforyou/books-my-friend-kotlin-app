@@ -40,32 +40,29 @@ without crashing.
 
 ## Permissions
 
-This app requires the following permissions:
+None. The app works fully offline and asks for no Android permissions.
 
-* `AUTHENTICATE_ACCOUNTS`
-* `SYSTEM_ALERT_WINDOW`
-* `READ_CONTACTS`
-* `GET_ACCOUNTS`
-* `READ_CALENDAR`
-* `WRITE_CALENDAR`
-* `BLUETOOTH_CONNECT`
-* `BLUETOOTH`
-* `ACCESS_COARSE_LOCATION`
-* `ACCESS_FINE_LOCATION`
-* `POST_NOTIFICATIONS`
-* `ACCESS_NOTIFICATION_POLICY`
-* `INTERNET`
-* `ACCESS_NETWORK_STATE`
-* `ACCESS_WIFI_STATE`
-* `CHANGE_WIFI_STATE`
-* `VIBRATE`
-* `WRITE_SYNC_SETTINGS`
-* `READ_SYNC_SETTINGS`
-* `com.google.android.gms.permission.AD_ID`
-* `REQUEST_COMPANION_USE_DATA_IN_BACKGROUND`
-* `FOREGROUND_SERVICE`
-* `READ_EXTERNAL_STORAGE`
-* `MANAGE_EXTERNAL_STORAGE`
+## Releases
+
+[`.github/workflows/release.yml`](.github/workflows/release.yml) publishes a GitHub release automatically:
+
+1. Bump `versionCode` and `versionName` in [`app/build.gradle.kts`](app/build.gradle.kts) and merge to `main`.
+2. When **Android CI** passes on `main`, the workflow builds the release APK and App Bundle,
+   tags the commit `v<versionName>` and attaches the files plus `SHA256SUMS.txt` to a new release.
+3. If the tag already exists, nothing happens, so ordinary merges never create duplicate releases.
+
+To sign releases with your own key, add these repository secrets
+(**Settings → Secrets and variables → Actions**):
+
+| Secret | Value |
+| --- | --- |
+| `KEYSTORE_BASE64` | your keystore file, base64-encoded (`base64 -w0 release.jks`) |
+| `KEYSTORE_PASSWORD` | keystore password |
+| `KEY_ALIAS` | key alias |
+| `KEY_PASSWORD` | key password |
+
+Without these secrets the workflow still publishes a **pre-release** whose APK is signed with a
+temporary test key: fine for trying the app, but each test build must be uninstalled before the next.
 
 ## Getting Started
 

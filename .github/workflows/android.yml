@@ -28,6 +28,18 @@ jobs:
       - name: Build debug & release, lint, unit tests
         run: ./gradlew lintDebug testDebugUnitTest assembleDebug assembleRelease
 
+      - name: Verify release signing configuration
+        run: |
+          keytool -genkeypair -keystore "$RUNNER_TEMP/ci.jks" -storepass ci-pass -keypass ci-pass \
+            -alias ci -keyalg RSA -keysize 2048 -validity 1 -dname "CN=CI signing check"
+          BMF_KEYSTORE_FILE="$RUNNER_TEMP/ci.jks" BMF_KEYSTORE_PASSWORD=ci-pass BMF_KEY_ALIAS=ci BMF_KEY_PASSWORD=ci-pass \
+            ./gradlew assembleRelease bundleRelease
+          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          "$BUILD_TOOLS/apksigner" verify --print-certs app/build/outputs/apk/release/app-release.apk | grep "CN=CI signing check"
+          jarsigner -verify app/build/outputs/bundle/release/app-release.aab | grep "jar verified"
+          # Leave the unsigned APK in place for the emulator smoke test.
+          ./gradlew assembleRelease
+
       - name: Upload APKs
         uses: actions/upload-artifact@v5
         with:
