@@ -1,0 +1,124 @@
+name: Release
+
+# Publishes a GitHub release after "Android CI" passes on main, whenever versionName
+# in app/build.gradle.kts has no matching v<versionName> tag yet.
+on:
+  workflow_run:
+    workflows: [ "Android CI" ]
+    types: [ completed ]
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Build & publish release
+    if: github.event_name == 'workflow_dispatch' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Read version
+        id: version
+        run: |
+          name=$(sed -nE 's/^\s*versionName = "([^"]+)".*/\1/p' app/build.gradle.kts | head -1)
+          code=$(sed -nE 's/^\s*versionCode = ([0-9]+).*/\1/p' app/build.gradle.kts | head -1)
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          echo "tag=v$name" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/v$name" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Tag v$name already exists; nothing to release."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/setup-java@v5
+        if: steps.version.outputs.exists == 'false'
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v5
+        if: steps.version.outputs.exists == 'false'
+
+      - name: Decode signing key
+        id: signing
+        if: steps.version.outputs.exists == 'false'
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/release.jks"
+            echo "BMF_KEYSTORE_FILE=$RUNNER_TEMP/release.jks" >> "$GITHUB_ENV"
+            echo "signed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::KEYSTORE_BASE64 secret is not set. Publishing a test-signed pre-release instead."
+            echo "signed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build release APK and App Bundle
+        if: steps.version.outputs.exists == 'false'
+        env:
+          BMF_KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          BMF_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          BMF_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: ./gradlew assembleRelease bundleRelease
+
+      - name: Collect release files
+        if: steps.version.outputs.exists == 'false'
+        run: |
+          mkdir -p dist
+          base="books-my-friend-${{ steps.version.outputs.tag }}"
+          if [ "${{ steps.signing.outputs.signed }}" = "true" ]; then
+            cp app/build/outputs/apk/release/app-release.apk "dist/$base.apk"
+            cp app/build/outputs/bundle/release/app-release.aab "dist/$base.aab"
+          else
+            # Without the release key, sign the APK with a throwaway key so it can still be
+            # installed for testing. Updates between test builds need an uninstall first.
+            keytool -genkeypair -keystore "$RUNNER_TEMP/test.jks" -storepass android -keypass android \
+              -alias test -keyalg RSA -keysize 2048 -validity 365 -dname "CN=Books My Friend test build"
+            BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+            "$BUILD_TOOLS/zipalign" -f -p 4 app/build/outputs/apk/release/app-release-unsigned.apk "$RUNNER_TEMP/aligned.apk"
+            "$BUILD_TOOLS/apksigner" sign --ks "$RUNNER_TEMP/test.jks" --ks-pass pass:android \
+              --key-pass pass:android --ks-key-alias test --out "dist/$base-test-signed.apk" "$RUNNER_TEMP/aligned.apk"
+          fi
+          BUILD_TOOLS=$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)
+          for apk in dist/*.apk; do "$BUILD_TOOLS/apksigner" verify --print-certs "$apk" | head -3; done
+          (cd dist && sha256sum * > SHA256SUMS.txt)
+          ls -la dist
+
+      - name: Publish GitHub release
+        if: steps.version.outputs.exists == 'false'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+        run: |
+          tag="${{ steps.version.outputs.tag }}"
+          {
+            echo "## Books My Friend ${{ steps.version.outputs.name }}"
+            echo
+            echo "Version code ${{ steps.version.outputs.code }} · built from \`${RELEASE_SHA::7}\` after all CI checks passed."
+            echo
+            if [ "${{ steps.signing.outputs.signed }}" = "true" ]; then
+              echo "Download the \`.apk\` to install on a phone, or upload the \`.aab\` to Google Play."
+            else
+              echo "> **Test build.** This APK is signed with a temporary key because the release signing secrets"
+              echo "> are not configured yet. Install it for testing; uninstall before installing a newer test build."
+            fi
+          } > notes.md
+          prerelease=""
+          [ "${{ steps.signing.outputs.signed }}" = "true" ] || prerelease="--prerelease"
+          gh release create "$tag" dist/* \
+            --target "$RELEASE_SHA" \
+            --title "Books My Friend ${{ steps.version.outputs.name }}" \
+            --notes-file notes.md --generate-notes $prerelease

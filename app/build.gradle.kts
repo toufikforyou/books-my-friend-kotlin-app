@@ -11,13 +11,33 @@ android {
         minSdk = 24
         targetSdk = 36
         versionCode = 2
-        versionName = "2026.10.29.2.0.0"
+        // Bumping versionName on main publishes a GitHub release tagged v<versionName>.
+        versionName = "2.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    /**
+     * Release signing comes from environment variables (set by the release workflow from
+     * repository secrets), so no keystore or password is ever committed.
+     */
+    val releaseKeystore = System.getenv("BMF_KEYSTORE_FILE")?.let { file(it) }?.takeIf { it.exists() }
+    signingConfigs {
+        if (releaseKeystore != null) {
+            create("release") {
+                storeFile = releaseKeystore
+                storePassword = System.getenv("BMF_KEYSTORE_PASSWORD")
+                keyAlias = System.getenv("BMF_KEY_ALIAS")
+                keyPassword = System.getenv("BMF_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
+            if (releaseKeystore != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
