@@ -75,6 +75,18 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           script: bash .github/scripts/device-checks.sh
 
+      - name: Print screenshot previews
+        if: always()
+        run: |
+          # Small JPEG previews, base64-encoded, so screens can be reviewed from the log alone.
+          for f in device-results/screenshots/*.png device-results/release-launch.png; do
+            [ -f "$f" ] || continue
+            convert "$f" -resize 300x -quality 55 /tmp/preview.jpg
+            echo "SHOT-BEGIN $(basename "$f" .png)"
+            base64 -w 4000 /tmp/preview.jpg
+            echo "SHOT-END"
+          done
+
       - name: Upload screenshots & logs
         if: always()
         uses: actions/upload-artifact@v5

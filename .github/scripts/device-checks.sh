@@ -8,7 +8,7 @@ PKG=com.sopnolikhi.booksmyfriend
 mkdir -p "$OUT/screenshots"
 
 TESTS_OK=true
-./gradlew connectedDebugAndroidTest || TESTS_OK=false
+./gradlew connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true || TESTS_OK=false
 if [ "$TESTS_OK" = false ]; then
   echo "::group::Instrumented test failures"
   python3 - <<'PY'

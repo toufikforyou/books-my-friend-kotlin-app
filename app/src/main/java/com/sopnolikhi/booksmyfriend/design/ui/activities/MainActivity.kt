@@ -46,16 +46,23 @@ class MainActivity : AppCompatActivity() {
                 tabs.forEach { (_, tag) -> add(R.id.mainFragmentContainer, createTab(tag), tag) }
             }
         }
-        showTab(binding.mainBottomNavigation.selectedItemId)
-
         binding.mainBottomNavigation.setOnItemSelectedListener { item ->
             showTab(item.itemId)
             true
         }
+        // The bottom bar restores its own selection only after onCreate, so restore the tab explicitly.
+        val selectedTab = savedInstanceState?.getInt(KEY_SELECTED_TAB) ?: R.id.navigationHome
+        binding.mainBottomNavigation.selectedItemId = selectedTab
+        showTab(selectedTab)
         binding.mainBottomNavigation.setOnItemReselectedListener { item ->
             (fragmentFor(item.itemId) as? ScrollableTab)?.scrollToTop()
         }
         onBackPressedDispatcher.addCallback(this, backToHome)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(KEY_SELECTED_TAB, binding.mainBottomNavigation.selectedItemId)
     }
 
     fun openTab(itemId: Int) {
@@ -86,5 +93,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
         backToHome.isEnabled = itemId != R.id.navigationHome
+    }
+
+    private companion object {
+        const val KEY_SELECTED_TAB = "selectedTab"
     }
 }
