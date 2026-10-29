@@ -7,7 +7,18 @@ OUT=device-results
 PKG=com.sopnolikhi.booksmyfriend
 mkdir -p "$OUT/screenshots"
 
-./gradlew connectedDebugAndroidTest
+TESTS_OK=true
+./gradlew connectedDebugAndroidTest || TESTS_OK=false
+if [ "$TESTS_OK" = false ]; then
+  echo "::group::Instrumented test failures"
+  python3 - <<'PY'
+import glob, re
+for f in glob.glob("app/build/outputs/androidTest-results/connected/**/*.xml", recursive=True):
+    for name, body in re.findall(r'<testcase name="([^"]+)"[^>]*>\s*<failure[^>]*>(.*?)</failure>', open(f).read(), re.S):
+        print(f"FAILED {name}:\n" + "\n".join(body.splitlines()[:40]))
+PY
+  echo "::endgroup::"
+fi
 
 adb pull "/sdcard/Android/data/$PKG/files/screenshots/." "$OUT/screenshots/" || true
 adb uninstall "$PKG" || true
@@ -34,3 +45,4 @@ if grep -E "FATAL EXCEPTION|AndroidRuntime: Process: $PKG" "$OUT/release-logcat.
 fi
 adb shell pidof "$PKG" || { echo "Release app is not running"; exit 1; }
 echo "Release smoke test passed"
+[ "$TESTS_OK" = true ] || { echo "Instrumented tests failed"; exit 1; }
