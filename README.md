@@ -44,12 +44,14 @@ None. The app works fully offline and asks for no Android permissions.
 
 ## Releases
 
-[`.github/workflows/release.yml`](.github/workflows/release.yml) publishes a GitHub release automatically:
+[`.github/workflows/release.yml`](.github/workflows/release.yml) publishes a GitHub release automatically
+every time **Android CI** passes on `main`:
 
-1. Bump `versionCode` and `versionName` in [`app/build.gradle.kts`](app/build.gradle.kts) and merge to `main`.
-2. When **Android CI** passes on `main`, the workflow builds the release APK and App Bundle,
-   tags the commit `v<versionName>` and attaches the files plus `SHA256SUMS.txt` to a new release.
-3. If the tag already exists, nothing happens, so ordinary merges never create duplicate releases.
+* Versions are `YEAR.MONTH.1.0.BUILD`: `2026.10.1.0.0`, `2026.10.1.0.1`, `2026.10.1.0.2`, …
+  The build number restarts at `0` each month. Change the `1.0` part with `bmf.versionBase`
+  in [`gradle.properties`](gradle.properties).
+* `versionCode` goes up by one with every release, so phones can always update.
+* The release contains the installable `.apk` (and the Play Store `.aab` once signing is set up).
 
 To sign releases with your own key, add these repository secrets
 (**Settings → Secrets and variables → Actions**):
@@ -61,8 +63,8 @@ To sign releases with your own key, add these repository secrets
 | `KEY_ALIAS` | key alias |
 | `KEY_PASSWORD` | key password |
 
-Without these secrets the workflow still publishes a **pre-release** whose APK is signed with a
-temporary test key: fine for trying the app, but each test build must be uninstalled before the next.
+Until then, each APK is signed with a temporary key, so an older version must be uninstalled
+before installing a newer one.
 
 ## Getting Started
 

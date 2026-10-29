@@ -10,9 +10,11 @@ android {
         applicationId = "com.sopnolikhi.booksmyfriend"
         minSdk = 24
         targetSdk = 36
-        versionCode = 2
-        // Bumping versionName on main publishes a GitHub release tagged v<versionName>.
-        versionName = "2.0.0"
+        // Releases are numbered YEAR.MONTH.<appVersionBase>.<build> (e.g. 2026.10.1.0.3).
+        // The release workflow passes the real values; local builds use the dev defaults below.
+        versionCode = (findProperty("bmf.versionCode") as String?)?.toInt() ?: 1
+        versionName = (findProperty("bmf.versionName") as String?)
+            ?: "${findProperty("bmf.versionBase")}-dev"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
